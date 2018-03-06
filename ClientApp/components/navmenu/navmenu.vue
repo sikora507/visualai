@@ -19,8 +19,8 @@
                         </router-link>
                     </li>
                     <li>
-                        <router-link to="/counter">
-                            <span class="glyphicon glyphicon-education"></span> Counter
+                        <router-link to="/activationfunctions">
+                            <span class="glyphicon glyphicon-check"></span> Activation functions
                         </router-link>
                     </li>
                     <li>
