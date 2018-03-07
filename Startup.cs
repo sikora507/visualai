@@ -46,8 +46,8 @@ namespace visualai
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    name: "api",
+                    template: "api/{controller}/{action}");
 
                 routes.MapSpaFallbackRoute(
                     name: "spa-fallback",

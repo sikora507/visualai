@@ -2,10 +2,10 @@
     <section>
         <h1>Activation functions</h1>
         <div class="flex">
-            <preview name="Sigmoid"></preview>
-            <preview name="TanH"></preview>
-            <preview name="Gauss"></preview>
-            <preview name="Sin"></preview>
+            <preview name="Sigmoid" action="GetSigmoid"></preview>
+            <preview name="TanH" action="GetTanh"></preview>
+            <preview name="Gauss" action="GetGauss"></preview>
+            <preview name="Sin" action="GetSine"></preview>
         </div>
     </section>
 </template>
