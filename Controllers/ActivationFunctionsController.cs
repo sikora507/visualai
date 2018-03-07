@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AiCore;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,21 +10,35 @@ namespace visualai.Controllers
 {
     public class ActivationFunctionsController : Controller
     {
-        public int GetSigmoid()
+        public double[] GetSigmoid()
         {
-            return 1;
+            return ProduceNumbers(ActiFunctions.Sigmoid);
         }
-        public int GetTanh()
+        public double[] GetTanh()
         {
-            return 2;
+            return ProduceNumbers(ActiFunctions.Tanh);
         }
-        public int GetGauss()
+        public double[] GetGauss()
         {
-            return 3;
+            return ProduceNumbers(ActiFunctions.Gaussian);
         }
-        public int GetSine()
+        public double[] GetSine()
         {
-            return 4;
+            return ProduceNumbers(ActiFunctions.Sin);
+        }
+        public double[] GetSinc()
+        {
+            return ProduceNumbers(ActiFunctions.Sinc);
+        }
+
+        public double[] ProduceNumbers(Func<double, double> producingFunction)
+        {
+            List<double> points = new List<double>();
+            for (double i = -10; i < 10; i += 0.1)
+            {
+                points.Add(producingFunction(i));
+            }
+            return points.ToArray();
         }
     }
 }

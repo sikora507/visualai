@@ -6,6 +6,7 @@
             <preview name="TanH" action="GetTanh"></preview>
             <preview name="Gauss" action="GetGauss"></preview>
             <preview name="Sin" action="GetSine"></preview>
+            <preview name="Sinc" action="GetSinc"></preview>
         </div>
     </section>
 </template>
