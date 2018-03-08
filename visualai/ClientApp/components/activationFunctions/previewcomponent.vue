@@ -1,37 +1,55 @@
 ﻿<template>
     <div class="function">
         <h3>{{name}}</h3>
-        <button class="btn btn-default" @click="computeFunction">
-            Compute
-        </button>
+        <h4 class="factor">{{scalingFactor}}*x</h4>
+        <vue-slider v-model="scalingFactor" v-bind="options"></vue-slider>
         <div class="preview">
-            <chart width="350" height="170" :points="chartData"></chart>
+            <chart :width="350" :height="170" :points="chartData"></chart>
         </div>
     </div>
 </template>
 <script>
     import Vue from 'vue';
     import Chart from './chart.vue';
+    import vueSlider from 'vue-slider-component';
 
     export default {
         props: ['name', 'action'],
         data: function () {
             return {
-                chartData: ''
+                chartData: null,
+                scalingFactor: 1,
+                options: {
+                    min: 0.1,
+                    max: 2,
+                    interval: 0.1,
+                    tooltip: false,
+                    processStyle: {
+                        "backgroundColor": "gray"
+                    }
+                }
             }
         },
+        mounted() {
+            this.getData();
+        },
         methods: {
-            computeFunction: function () {
-                this.chartData = null;
-                fetch(`api/ActivationFunctions/${this.action}`)
+            getData: function () {
+                fetch(`api/ActivationFunctions/${this.action}?scale=${this.scalingFactor}`)
                     .then(response => response.json())
                     .then(data => {
                         this.chartData = data;
                     });
             }
         },
+        watch: {
+            scalingFactor: function () {
+                this.getData();
+            }
+        },
         components: {
-            'chart': Chart
+            Chart,
+            vueSlider
         }
     }
 </script>
@@ -53,5 +71,10 @@
         position: absolute;
         top: 15px;
         right: 15px;
+    }
+    .factor {
+        position: absolute;
+        top: 15px;
+        left: 15px;
     }
 </style>

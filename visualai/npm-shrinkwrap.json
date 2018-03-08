@@ -4304,6 +4304,12 @@
       "integrity": "sha512-V9VynDSnJL1+2UPltjDUq0qhBDp8Xt2k5L19+8XjoNHZp15c3GweEDepP+yq3ebX/KCY6sLaHlSt40I6Hvmy3g==",
       "dev": true
     },
+    "vue-slider-component": {
+      "version": "2.5.8",
+      "resolved": "https://registry.npmjs.org/vue-slider-component/-/vue-slider-component-2.5.8.tgz",
+      "integrity": "sha512-AGqgfTRTihNPMndLUbGKivsKzWew8LLvtU2JkKxpcEFghvEWvc5r1qMVg0MpbvtpO7hbB0JEOJD0zO0IGDFLuw==",
+      "dev": true
+    },
     "vue-style-loader": {
       "version": "2.0.5",
       "resolved": "https://registry.npmjs.org/vue-style-loader/-/vue-style-loader-2.0.5.tgz",
