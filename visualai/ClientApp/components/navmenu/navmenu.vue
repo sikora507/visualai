@@ -24,8 +24,8 @@
                         </router-link>
                     </li>
                     <li>
-                        <router-link to="/fetchdata">
-                            <span class="glyphicon glyphicon-th-list"></span> Fetch data
+                        <router-link to="/cppn">
+                            <span class="glyphicon glyphicon-check"></span> CPPN
                         </router-link>
                     </li>
                 </ul>
