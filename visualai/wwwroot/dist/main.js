@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "5488a7a79d4677629fa0"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "c5f44c7dce8cc96419a8"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -1256,7 +1256,7 @@ exports = module.exports = __webpack_require__(3)();
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", "", {"version":3,"sources":[],"names":[],"mappings":"","file":"cppn.vue","sourceRoot":"webpack://"}]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n", "", {"version":3,"sources":[],"names":[],"mappings":"","file":"cppn.vue","sourceRoot":"webpack://"}]);
 
 // exports
 
@@ -2806,7 +2806,7 @@ var Component = __webpack_require__(2)(
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\dev\\visualai\\visualai\\ClientApp\\components\\activationfunctions\\activationfunctions.vue"
+Component.options.__file = "C:\\Users\\Tomek\\Desktop\\visualai\\visualai\\ClientApp\\components\\activationfunctions\\activationfunctions.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] activationfunctions.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -2844,7 +2844,7 @@ var Component = __webpack_require__(2)(
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\dev\\visualai\\visualai\\ClientApp\\components\\activationfunctions\\chart.vue"
+Component.options.__file = "C:\\Users\\Tomek\\Desktop\\visualai\\visualai\\ClientApp\\components\\activationfunctions\\chart.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] chart.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -2882,7 +2882,7 @@ var Component = __webpack_require__(2)(
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\dev\\visualai\\visualai\\ClientApp\\components\\activationfunctions\\previewcomponent.vue"
+Component.options.__file = "C:\\Users\\Tomek\\Desktop\\visualai\\visualai\\ClientApp\\components\\activationfunctions\\previewcomponent.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] previewcomponent.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -2916,7 +2916,7 @@ var Component = __webpack_require__(2)(
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\dev\\visualai\\visualai\\ClientApp\\components\\app\\app.vue"
+Component.options.__file = "C:\\Users\\Tomek\\Desktop\\visualai\\visualai\\ClientApp\\components\\app\\app.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] app.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -2954,7 +2954,7 @@ var Component = __webpack_require__(2)(
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\dev\\visualai\\visualai\\ClientApp\\components\\cppn\\cppn.vue"
+Component.options.__file = "C:\\Users\\Tomek\\Desktop\\visualai\\visualai\\ClientApp\\components\\cppn\\cppn.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] cppn.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -2988,7 +2988,7 @@ var Component = __webpack_require__(2)(
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\dev\\visualai\\visualai\\ClientApp\\components\\home\\home.vue"
+Component.options.__file = "C:\\Users\\Tomek\\Desktop\\visualai\\visualai\\ClientApp\\components\\home\\home.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] home.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -3026,7 +3026,7 @@ var Component = __webpack_require__(2)(
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\dev\\visualai\\visualai\\ClientApp\\components\\navmenu\\navmenu.vue"
+Component.options.__file = "C:\\Users\\Tomek\\Desktop\\visualai\\visualai\\ClientApp\\components\\navmenu\\navmenu.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] navmenu.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -3285,19 +3285,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -3416,7 +3403,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "href": "https://en.wikipedia.org/wiki/Compositional_pattern-producing_network"
     }
-  }, [_vm._v("Wikipedia")])]), _vm._v(" "), _c('h2', [_vm._v("Compositional pattern-producing networks (CPPNs)")]), _vm._v(" "), _c('p', [_vm._v("are a variation of artificial neural networks (ANNs) that have an architecture whose evolution is guided by genetic algorithms.")]), _vm._v(" "), _c('p', [_vm._v("\n        While ANNs often contain only sigmoid functions and sometimes Gaussian functions, CPPNs can include both types of functions and many others. The choice of functions for the canonical set can be biased toward specific types of patterns and regularities. For example, periodic functions such as sine produce segmented patterns with repetitions, while symmetric functions such as Gaussian produce symmetric patterns. Linear functions can be employed to produce linear or fractal-like patterns. Thus, the architect of a CPPN-based genetic art system can bias the types of patterns it generates by deciding the set of canonical functions to include.\n    ")]), _vm._v(" "), _c('p', [_vm._v("\n        CPPNs can be evolved through neuroevolution techniques such as neuroevolution of augmenting topologies (called CPPN-NEAT).\n    ")]), _vm._v(" "), _c('p', [_vm._v("\n        CPPNs have been shown to be a very powerful encoding when evolving the following:\n    ")]), _vm._v(" "), _c('ul', [_c('li', [_vm._v("Neural networks, via the HyperNEAT algorithm,")]), _vm._v(" "), _c('li', [_vm._v("2D images, on \"PicBreeder.org\",")]), _vm._v(" "), _c('li', [_vm._v("3D objects, on \"EndlessForms.com\",")]), _vm._v(" "), _c('li', [_vm._v("Robot morphologies Rigid Robots Soft Robots.")])]), _vm._v(" "), _c('p')])
+  }, [_vm._v("Wikipedia")])]), _vm._v(" "), _c('h2', [_vm._v("Compositional pattern-producing networks (CPPNs)")]), _vm._v(" "), _c('p', [_vm._v("are a variation of artificial neural networks (ANNs) that have an architecture whose evolution is guided by genetic algorithms.")]), _vm._v(" "), _c('p', [_vm._v("\n        While ANNs often contain only sigmoid functions and sometimes Gaussian functions, CPPNs can include both types of functions and many others. The choice of functions for the canonical set can be biased toward specific types of patterns and regularities. For example, periodic functions such as sine produce segmented patterns with repetitions, while symmetric functions such as Gaussian produce symmetric patterns. Linear functions can be employed to produce linear or fractal-like patterns. Thus, the architect of a CPPN-based genetic art system can bias the types of patterns it generates by deciding the set of canonical functions to include.\n    ")])])
 }]}
 module.exports.render._withStripped = true
 if (true) {
