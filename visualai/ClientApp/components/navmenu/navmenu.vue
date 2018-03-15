@@ -24,6 +24,11 @@
                         </router-link>
                     </li>
                     <li>
+                        <router-link to="/simpleNetwork">
+                            <span class="glyphicon glyphicon-check"></span> Simple network
+                        </router-link>
+                    </li>
+                    <li>
                         <router-link to="/cppn">
                             <span class="glyphicon glyphicon-check"></span> CPPN
                         </router-link>

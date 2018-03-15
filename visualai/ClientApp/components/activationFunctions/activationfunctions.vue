@@ -11,7 +11,7 @@
     </section>
 </template>
 <script>
-    import Vue from 'vue';
+    //import Vue from 'vue';
     import PreviewComponent from './previewcomponent.vue'
     export default {
         data: function () {

@@ -9,7 +9,7 @@
     </div>
 </template>
 <script>
-    import Vue from 'vue';
+    //import Vue from 'vue';
     import Chart from './chart.vue';
     import vueSlider from 'vue-slider-component';
 

@@ -12,7 +12,7 @@
 </template>
 
 <script>
-    import Vue from 'vue';
+    //import Vue from 'vue';
     import MenuComponent from '../navmenu/navmenu.vue';
 
     export default {

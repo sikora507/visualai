@@ -2,7 +2,7 @@
     <canvas></canvas>
 </template>
 <script>
-    import Vue from 'vue';
+    // import Vue from 'vue';
     // initialization in mounted callback
 
     function clearCanvas(ctx) {
@@ -72,8 +72,8 @@
                     return;
                 }
                 clearCanvas(this.ctx);
-                console.log('Chart - got data:');
-                console.log(val);
+                //console.log('Chart - got data:');
+                //console.log(val);
                 drawLine(val, this.ctx);
             }
         }
