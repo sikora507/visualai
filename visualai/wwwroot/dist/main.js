@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "02b57f7be840c6f5feed"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "2d51380ed685cf708ad0"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -1256,7 +1256,7 @@ exports = module.exports = __webpack_require__(3)();
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", "", {"version":3,"sources":[],"names":[],"mappings":"","file":"simplenetwork.vue","sourceRoot":"webpack://"}]);
+exports.push([module.i, "\n#visualization[data-v-40a97452] {\n    height: 500px;\n}\n", "", {"version":3,"sources":["/./ClientApp/components/simplenetwork/simplenetwork.vue?21c09162"],"names":[],"mappings":";AAoDA;IACA,cAAA;CACA","file":"simplenetwork.vue","sourcesContent":["<template>\r\n    <div>\r\n        <h2>Simple neural network</h2>\r\n        <p>2 input signals 3 hidden neurons and single output. 3 layers with step by step walkthrough.</p>\r\n        <div id=\"visualization\"></div>\r\n    </div>\r\n</template>\r\n<script>\r\n    import { DataSet, Network } from 'vis';\r\n    export default {\r\n        mounted: function () {\r\n            var container = document.getElementById('visualization');\r\n            fetch(`api/SimpleNetwork/GetSimpleNetwork`)\r\n                .then(response => response.json())\r\n                .then(data => {\r\n                    var network = new Network(container, data, {\r\n                        nodes: {\r\n                            shape: 'box',\r\n                            color: {\r\n                                background: 'cornsilk',\r\n                                border: 'gray',\r\n                                highlight: {\r\n                                    background: 'cornsilk', border: 'gray'\r\n                                }\r\n                            }\r\n                        },\r\n                        edges: {\r\n                            arrows: {\r\n                                to: {\r\n                                    enabled: true\r\n                                }\r\n                            }\r\n                        },\r\n                        layout: {\r\n                            hierarchical: {\r\n                                direction: 'LR',\r\n                                sortMethod: 'directed'\r\n                            }\r\n                        },\r\n                        interaction: {\r\n                            //dragNodes: false,\r\n                            //dragView: false,\r\n                            hoverConnectedEdges: false,\r\n                            //selectable: false,\r\n                            selectConnectedEdges: false,\r\n                        }\r\n                    });\r\n                });\r\n        }\r\n    }\r\n</script>\r\n<style scoped>\r\n    #visualization {\r\n        height: 500px;\r\n    }\r\n</style>"],"sourceRoot":"webpack://"}]);
 
 // exports
 
@@ -63017,7 +63017,7 @@ var Component = __webpack_require__(2)(
   /* template */
   __webpack_require__(45),
   /* scopeId */
-  null,
+  "data-v-40a97452",
   /* cssModules */
   null
 )
@@ -63300,30 +63300,42 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     mounted: function () {
         var container = document.getElementById('visualization');
-        // create an array with nodes
-        var nodes = new __WEBPACK_IMPORTED_MODULE_0_vis__["DataSet"]([
-            { id: 1, label: 'Node 1' },
-            { id: 2, label: 'Node 2' },
-            { id: 3, label: 'Node 3' },
-            { id: 4, label: 'Node 4' },
-            { id: 5, label: 'Node 5' }
-        ]);
-
-        // create an array with edges
-        var edges = new __WEBPACK_IMPORTED_MODULE_0_vis__["DataSet"]([
-            { from: 1, to: 3 },
-            { from: 1, to: 2 },
-            { from: 2, to: 4 },
-            { from: 2, to: 5 }
-        ]);
-
-        var data = {
-            nodes: nodes,
-            edges: edges
-        };
-        var options = {};
-
-        var network = new __WEBPACK_IMPORTED_MODULE_0_vis__["Network"](container, data, options);
+        fetch(`api/SimpleNetwork/GetSimpleNetwork`)
+            .then(response => response.json())
+            .then(data => {
+                var network = new __WEBPACK_IMPORTED_MODULE_0_vis__["Network"](container, data, {
+                    nodes: {
+                        shape: 'box',
+                        color: {
+                            background: 'cornsilk',
+                            border: 'gray',
+                            highlight: {
+                                background: 'cornsilk', border: 'gray'
+                            }
+                        }
+                    },
+                    edges: {
+                        arrows: {
+                            to: {
+                                enabled: true
+                            }
+                        }
+                    },
+                    layout: {
+                        hierarchical: {
+                            direction: 'LR',
+                            sortMethod: 'directed'
+                        }
+                    },
+                    interaction: {
+                        //dragNodes: false,
+                        //dragView: false,
+                        hoverConnectedEdges: false,
+                        //selectable: false,
+                        selectConnectedEdges: false,
+                    }
+                });
+            });
     }
 });
 
@@ -63652,7 +63664,7 @@ var content = __webpack_require__(9);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("6a07c920", content, false);
+var update = __webpack_require__(4)("9c4af20a", content, false);
 // Hot Module Replacement
 if(true) {
  // When the styles change, update the <style> tags

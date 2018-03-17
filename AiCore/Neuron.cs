@@ -4,8 +4,10 @@ using System.Text;
 
 namespace AiCore
 {
-    class Neuron
+    public class Neuron
     {
+        public int Id { get; set; }
+
         public double InputSum { get; set; }
 
         public void Fire ()
@@ -17,7 +19,5 @@ namespace AiCore
         public double Output { get; private set; }
 
         private Func<double, double> ActivationFunction = ActiFunctions.Sigmoid;
-
-        public List<Connection> Connections = new List<Connection>();
     }
 }

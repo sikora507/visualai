@@ -4,22 +4,22 @@ using System.Text;
 
 namespace AiCore
 {
-    class Connection
+    public class Connection
     {
-        private readonly double _weight;
-        private readonly Neuron _inputNeuron;
-        private readonly Neuron _outputNeuron;
+        public double Weight;
+        public Neuron InputNeuron;
+        public Neuron OutputNeuron;
 
         public Connection(Neuron inputNeuron, Neuron outputNeuron, double weight)
         {
-            _weight = weight;
-            _inputNeuron = inputNeuron;
-            _outputNeuron = outputNeuron;
+            Weight = weight;
+            InputNeuron = inputNeuron;
+            OutputNeuron = outputNeuron;
         }
 
         public void Propagate()
         {
-            _outputNeuron.InputSum += _inputNeuron.Output * _weight;
+            OutputNeuron.InputSum += InputNeuron.Output * Weight;
         }
     }
 }
