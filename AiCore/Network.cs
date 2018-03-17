@@ -72,7 +72,7 @@ namespace AiCore
                 vis.Nodes.Add(new Node
                 {
                     Id = node.Id,
-                    Label = $"{node.Id}\nin:{node.InputSum:0.00}\nout:{node.Output:0.00}"
+                    Label = $"{node.Id} - {node.ActivationFunction.Name}\nin:{node.InputSum:0.00}\nout:{node.Output:0.00}"
                 });
             }
             foreach (var edge in _connections)

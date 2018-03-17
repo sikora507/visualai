@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "2d51380ed685cf708ad0"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "d7ffaa03ad7ef907b819"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -1256,7 +1256,7 @@ exports = module.exports = __webpack_require__(3)();
 
 
 // module
-exports.push([module.i, "\n#visualization[data-v-40a97452] {\n    height: 500px;\n}\n", "", {"version":3,"sources":["/./ClientApp/components/simplenetwork/simplenetwork.vue?21c09162"],"names":[],"mappings":";AAoDA;IACA,cAAA;CACA","file":"simplenetwork.vue","sourcesContent":["<template>\r\n    <div>\r\n        <h2>Simple neural network</h2>\r\n        <p>2 input signals 3 hidden neurons and single output. 3 layers with step by step walkthrough.</p>\r\n        <div id=\"visualization\"></div>\r\n    </div>\r\n</template>\r\n<script>\r\n    import { DataSet, Network } from 'vis';\r\n    export default {\r\n        mounted: function () {\r\n            var container = document.getElementById('visualization');\r\n            fetch(`api/SimpleNetwork/GetSimpleNetwork`)\r\n                .then(response => response.json())\r\n                .then(data => {\r\n                    var network = new Network(container, data, {\r\n                        nodes: {\r\n                            shape: 'box',\r\n                            color: {\r\n                                background: 'cornsilk',\r\n                                border: 'gray',\r\n                                highlight: {\r\n                                    background: 'cornsilk', border: 'gray'\r\n                                }\r\n                            }\r\n                        },\r\n                        edges: {\r\n                            arrows: {\r\n                                to: {\r\n                                    enabled: true\r\n                                }\r\n                            }\r\n                        },\r\n                        layout: {\r\n                            hierarchical: {\r\n                                direction: 'LR',\r\n                                sortMethod: 'directed'\r\n                            }\r\n                        },\r\n                        interaction: {\r\n                            //dragNodes: false,\r\n                            //dragView: false,\r\n                            hoverConnectedEdges: false,\r\n                            //selectable: false,\r\n                            selectConnectedEdges: false,\r\n                        }\r\n                    });\r\n                });\r\n        }\r\n    }\r\n</script>\r\n<style scoped>\r\n    #visualization {\r\n        height: 500px;\r\n    }\r\n</style>"],"sourceRoot":"webpack://"}]);
+exports.push([module.i, "\n#visualization[data-v-40a97452] {\n    height: 500px;\n}\n", "", {"version":3,"sources":["/./ClientApp/components/simplenetwork/simplenetwork.vue?1a0191ad"],"names":[],"mappings":";AAqEA;IACA,cAAA;CACA","file":"simplenetwork.vue","sourcesContent":["<template>\r\n    <div>\r\n        <h2>Simple neural network</h2>\r\n        <p>2 input signals 3 hidden neurons and single output. 3 layers with step by step walkthrough.</p>\r\n        <div class=\"text-center\">\r\n            <button class=\"btn btn-primary\" @click=\"nextStep\">Process next step</button>\r\n        </div>\r\n        <div id=\"visualization\"></div>\r\n    </div>\r\n</template>\r\n<script>\r\n    import { DataSet, Network } from 'vis';\r\n    var nodes = null;\r\n    export default {\r\n        mounted: function () {\r\n            var container = document.getElementById('visualization');\r\n            fetch(`api/SimpleNetwork/GetSimpleNetwork`)\r\n                .then(response => response.json())\r\n                .then(data => {\r\n                    nodes = new DataSet();\r\n                    data.nodes.forEach((item) => { nodes.add(item); });\r\n                    var network = new Network(container, { nodes: nodes, edges: data.edges }, {\r\n                        nodes: {\r\n                            shape: 'box',\r\n                            color: {\r\n                                background: 'cornsilk',\r\n                                border: 'gray',\r\n                                highlight: {\r\n                                    background: 'cornsilk', border: 'gray'\r\n                                }\r\n                            }\r\n                        },\r\n                        edges: {\r\n                            arrows: {\r\n                                to: {\r\n                                    enabled: true\r\n                                }\r\n                            }\r\n                        },\r\n                        layout: {\r\n                            hierarchical: {\r\n                                direction: 'LR',\r\n                                sortMethod: 'directed'\r\n                            }\r\n                        },\r\n                        interaction: {\r\n                            //dragNodes: false,\r\n                            //dragView: false,\r\n                            hoverConnectedEdges: false,\r\n                            //selectable: false,\r\n                            selectConnectedEdges: false,\r\n                        }\r\n                    });\r\n                });\r\n        },\r\n        methods: {\r\n            nextStep: function () {\r\n                fetch(`api/SimpleNetwork/UpdateNetwork`)\r\n                    .then(response => response.json())\r\n                    .then(data => {\r\n                        data.nodes.forEach((item) => {\r\n                            nodes.update(item);\r\n                        });\r\n                    });\r\n            }\r\n        }\r\n    }\r\n</script>\r\n<style scoped>\r\n    #visualization {\r\n        height: 500px;\r\n    }\r\n</style>"],"sourceRoot":"webpack://"}]);
 
 // exports
 
@@ -63295,15 +63295,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 
+var nodes = null;
 /* harmony default export */ __webpack_exports__["default"] = ({
     mounted: function () {
         var container = document.getElementById('visualization');
         fetch(`api/SimpleNetwork/GetSimpleNetwork`)
             .then(response => response.json())
             .then(data => {
-                var network = new __WEBPACK_IMPORTED_MODULE_0_vis__["Network"](container, data, {
+                nodes = new __WEBPACK_IMPORTED_MODULE_0_vis__["DataSet"]();
+                data.nodes.forEach((item) => { nodes.add(item); });
+                var network = new __WEBPACK_IMPORTED_MODULE_0_vis__["Network"](container, { nodes: nodes, edges: data.edges }, {
                     nodes: {
                         shape: 'box',
                         color: {
@@ -63336,6 +63342,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     }
                 });
             });
+    },
+    methods: {
+        nextStep: function () {
+            fetch(`api/SimpleNetwork/UpdateNetwork`)
+                .then(response => response.json())
+                .then(data => {
+                    data.nodes.forEach((item) => {
+                        nodes.update(item);
+                    });
+                });
+        }
     }
 });
 
@@ -63422,14 +63439,19 @@ if (true) {
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _vm._m(0)
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', [_c('h2', [_vm._v("Simple neural network")]), _vm._v(" "), _c('p', [_vm._v("2 input signals 3 hidden neurons and single output. 3 layers with step by step walkthrough.")]), _vm._v(" "), _c('div', {
+    staticClass: "text-center"
+  }, [_c('button', {
+    staticClass: "btn btn-primary",
+    on: {
+      "click": _vm.nextStep
+    }
+  }, [_vm._v("Process next step")])]), _vm._v(" "), _c('div', {
     attrs: {
       "id": "visualization"
     }
   })])
-}]}
+},staticRenderFns: []}
 module.exports.render._withStripped = true
 if (true) {
   module.hot.accept()

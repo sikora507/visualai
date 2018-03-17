@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using AiCore.ActivationFunctions;
 
 namespace AiCore
 {
@@ -10,14 +8,14 @@ namespace AiCore
 
         public double InputSum { get; set; }
 
-        public void Fire ()
+        public void Fire()
         {
-            Output = ActivationFunction(InputSum);
+            Output = ActivationFunction.Process(InputSum);
             InputSum = 0;
         }
 
         public double Output { get; private set; }
 
-        private Func<double, double> ActivationFunction = ActiFunctions.Sigmoid;
+        public ActivationFunction ActivationFunction { get; set; } = new Tanh();
     }
 }
