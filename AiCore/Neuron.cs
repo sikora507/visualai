@@ -1,4 +1,5 @@
-﻿using AiCore.ActivationFunctions;
+﻿using System;
+using AiCore.ActivationFunctions;
 
 namespace AiCore
 {
@@ -17,5 +18,6 @@ namespace AiCore
         public double Output { get; private set; }
 
         public ActivationFunction ActivationFunction { get; set; } = new Tanh();
+
     }
 }

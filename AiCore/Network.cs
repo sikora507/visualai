@@ -1,5 +1,7 @@
-﻿using System;
+﻿using AiCore.ActivationFunctions;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace AiCore
@@ -39,6 +41,43 @@ namespace AiCore
 
             in1.InputSum = 5;
             in2.InputSum = 5;
+        }
+
+        public ConnectionMatrix ToConnectionMatrix()
+        {
+            var conMatrix = new ConnectionMatrix();
+            var neuronsCount = _neurons.Count;
+            var weightsArraySize = neuronsCount * ConnectionMatrix.WeightBitsPrecision;
+
+            conMatrix.ActiFunctions = new string[neuronsCount];
+            conMatrix.ConnectionPresence = new bool[neuronsCount * neuronsCount];
+            conMatrix.Weights = new int[weightsArraySize * weightsArraySize];
+
+            var n = 0;
+            foreach (var neuron in _neurons)
+            {
+                conMatrix.ActiFunctions[n] = neuron.ActivationFunction.Name;
+                n++;
+            }
+
+            var weightRange = ConnectionMatrix.MaxWeight - ConnectionMatrix.MinWeight;
+            var weightStep = weightRange / ConnectionMatrix.WeightBitsPrecision;
+
+            foreach (var connection in _connections)
+            {
+                var row = _neurons.IndexOf(connection.InputNeuron);
+                var col = _neurons.IndexOf(connection.OutputNeuron);
+                // update connection presence
+                conMatrix.ConnectionPresence[row * neuronsCount + col] = true;
+                // update connection weight
+                // handle special cases out of the way
+                if(connection.Weight > ConnectionMatrix.MaxWeight)
+                {
+                    //conMatrix.Weights
+                }
+            }
+
+            return conMatrix;
         }
 
         public void AddConnection(Connection connection)
