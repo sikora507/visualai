@@ -1,17 +1,11 @@
 ﻿<template>
-    <div>
-        <h2>Simple neural network</h2>
-        <p>2 input signals 3 hidden neurons and single output. 3 layers with step by step walkthrough.</p>
-        <div class="text-center">
-            <button class="btn btn-primary" @click="nextStep">Process next step</button>
-        </div>
-        <div id="visualization"></div>
-    </div>
+    <div id="visualization"></div>
 </template>
 <script>
     import { DataSet, Network } from 'vis';
     var nodes = null;
     export default {
+        props: ['newData'],
         mounted: function () {
             var container = document.getElementById('visualization');
             fetch(`api/SimpleNetwork/GetSimpleNetwork`)
@@ -53,15 +47,13 @@
                     });
                 });
         },
-        methods: {
-            nextStep: function () {
-                fetch(`api/SimpleNetwork/UpdateNetwork`)
-                    .then(response => response.json())
-                    .then(data => {
-                        data.nodes.forEach((item) => {
-                            nodes.update(item);
-                        });
+        watch: {
+            newData: function (data) {
+                if (data) {
+                    data.nodes.forEach((item) => {
+                        nodes.update(item);
                     });
+                }
             }
         }
     }

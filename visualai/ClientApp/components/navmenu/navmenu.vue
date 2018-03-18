@@ -29,6 +29,11 @@
                         </router-link>
                     </li>
                     <li>
+                        <router-link to="/serialization">
+                            <span class="glyphicon glyphicon-check"></span> Serialization to genome
+                        </router-link>
+                    </li>
+                    <li>
                         <router-link to="/cppn">
                             <span class="glyphicon glyphicon-check"></span> CPPN
                         </router-link>

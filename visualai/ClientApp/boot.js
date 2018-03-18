@@ -7,7 +7,8 @@ Vue.use(VueRouter);
 const routes = [
     { path: '/', component: require('./components/home/home.vue') },
     { path: '/activationfunctions', component: require('./components/activationfunctions/activationfunctions.vue') },
-    { path: '/simpleNetwork', component: require('./components/simplenetwork/simplenetwork.vue') },
+    { path: '/simpleNetwork', component: require('./components/simplenetwork/simpleNetworkPage.vue') },
+    { path: '/serialization', component: require('./components/serialization/serialization.vue') },
     { path: '/cppn', component: require('./components/cppn/cppn.vue') }
 ];
 
