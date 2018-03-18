@@ -8,7 +8,7 @@ namespace AiCore
     {
         public static readonly double MaxWeight = 20.0;
         public static readonly double MinWeight = -20.0;
-        public static readonly uint WeightBitsPrecision = 8;
+        public static readonly int WeightBitsPrecision = 8;
 
         // 3 "chromosomes"
         public string[] ActiFunctions { get; set; }

@@ -46,10 +46,9 @@ namespace UnitTests
         public void DecimalToBinaryTest(double toConvert, int precision, double min, double max, int[] expectedResult)
         {
             // arrange
-            var calculator = new BinaryCalculator();
 
             // act
-            var output = calculator.ToBinary(toConvert, precision, min, max);
+            var output = BinaryCalculator.ToBinary(toConvert, precision, min, max);
 
             // assert
             Assert.Equal(expectedResult.Length, output.Length);
@@ -61,9 +60,9 @@ namespace UnitTests
         public void BinaryToDecimalTest(int[] binary, double min, double max, double expectedResult)
         {
             // arrange
-            var calculator = new BinaryCalculator();
+
             // act
-            var output = calculator.ToDecimal(binary, min, max);
+            var output = BinaryCalculator.ToDecimal(binary, min, max);
             // assert
             Assert.True(Math.Abs(expectedResult - output) < 0.1);
         }

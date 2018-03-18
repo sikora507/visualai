@@ -6,7 +6,7 @@ namespace AiCore.Tools
 {
     public class BinaryCalculator
     {
-        public int[] ToBinary(double toConvert, int precision, double min, double max)
+        public static int[] ToBinary(double toConvert, int precision, double min, double max)
         {
             var result = new int[precision];
             if (toConvert >= max)
@@ -37,7 +37,7 @@ namespace AiCore.Tools
             return result;
         }
 
-        public double ToDecimal(int[] toConvert, double min, double max)
+        public static double ToDecimal(int[] toConvert, double min, double max)
         {
             double binaryResult = 0;
             var maxBinaryValue = (Math.Pow(2, toConvert.Length) - 1);

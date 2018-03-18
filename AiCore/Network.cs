@@ -1,4 +1,5 @@
 ﻿using AiCore.ActivationFunctions;
+using AiCore.Tools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,11 +48,10 @@ namespace AiCore
         {
             var conMatrix = new ConnectionMatrix();
             var neuronsCount = _neurons.Count;
-            var weightsArraySize = neuronsCount * ConnectionMatrix.WeightBitsPrecision;
 
             conMatrix.ActiFunctions = new string[neuronsCount];
             conMatrix.ConnectionPresence = new bool[neuronsCount * neuronsCount];
-            conMatrix.Weights = new int[weightsArraySize * weightsArraySize];
+            conMatrix.Weights = new int[neuronsCount * ConnectionMatrix.WeightBitsPrecision * neuronsCount];
 
             var n = 0;
             foreach (var neuron in _neurons)
@@ -60,9 +60,6 @@ namespace AiCore
                 n++;
             }
 
-            var weightRange = ConnectionMatrix.MaxWeight - ConnectionMatrix.MinWeight;
-            var weightStep = weightRange / ConnectionMatrix.WeightBitsPrecision;
-
             foreach (var connection in _connections)
             {
                 var row = _neurons.IndexOf(connection.InputNeuron);
@@ -70,10 +67,10 @@ namespace AiCore
                 // update connection presence
                 conMatrix.ConnectionPresence[row * neuronsCount + col] = true;
                 // update connection weight
-                // handle special cases out of the way
-                if(connection.Weight > ConnectionMatrix.MaxWeight)
+                var weightBinary = BinaryCalculator.ToBinary(connection.Weight, ConnectionMatrix.WeightBitsPrecision, ConnectionMatrix.MinWeight, ConnectionMatrix.MaxWeight);
+                for(var i = 0; i < weightBinary.Length; ++i)
                 {
-                    //conMatrix.Weights
+                    conMatrix.Weights[row * neuronsCount + col * ConnectionMatrix.WeightBitsPrecision + i] = weightBinary[i];
                 }
             }
 
