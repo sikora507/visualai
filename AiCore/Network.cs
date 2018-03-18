@@ -51,7 +51,7 @@ namespace AiCore
 
             conMatrix.ActiFunctions = new string[neuronsCount];
             conMatrix.ConnectionPresence = new bool[neuronsCount * neuronsCount];
-            conMatrix.Weights = new int[neuronsCount * ConnectionMatrix.WeightBitsPrecision * neuronsCount];
+            conMatrix.WeightsBinary = new int[neuronsCount * ConnectionMatrix.WeightBitsPrecision * neuronsCount];
 
             var n = 0;
             foreach (var neuron in _neurons)
@@ -70,7 +70,7 @@ namespace AiCore
                 var weightBinary = BinaryCalculator.ToBinary(connection.Weight, ConnectionMatrix.WeightBitsPrecision, ConnectionMatrix.MinWeight, ConnectionMatrix.MaxWeight);
                 for(var i = 0; i < weightBinary.Length; ++i)
                 {
-                    conMatrix.Weights[row * neuronsCount + col * ConnectionMatrix.WeightBitsPrecision + i] = weightBinary[i];
+                    conMatrix.WeightsBinary[row * neuronsCount * ConnectionMatrix.WeightBitsPrecision + col * ConnectionMatrix.WeightBitsPrecision + i] = weightBinary[i];
                 }
             }
 

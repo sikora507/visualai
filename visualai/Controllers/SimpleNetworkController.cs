@@ -19,5 +19,10 @@ namespace visualai.Controllers
             var result = _network.ToVisJsNetwork();
             return result;
         }
+
+        public ConnectionMatrix ToConnectionMatrix()
+        {
+            return _network.ToConnectionMatrix();
+        }
     }
 }
