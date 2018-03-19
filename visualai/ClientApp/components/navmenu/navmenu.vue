@@ -34,6 +34,11 @@
                         </router-link>
                     </li>
                     <li>
+                        <router-link to="/deserialization">
+                            <span class="glyphicon glyphicon-check"></span> Deserialization of genome
+                        </router-link>
+                    </li>
+                    <li>
                         <router-link to="/cppn">
                             <span class="glyphicon glyphicon-check"></span> CPPN
                         </router-link>

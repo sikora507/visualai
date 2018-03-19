@@ -24,5 +24,10 @@ namespace visualai.Controllers
         {
             return _network.ToConnectionMatrix();
         }
+
+        public int GetBitsPrecision()
+        {
+            return ConnectionMatrix.WeightBitsPrecision;
+        }
     }
 }

@@ -9,6 +9,7 @@ const routes = [
     { path: '/activationfunctions', component: require('./components/activationfunctions/activationfunctions.vue') },
     { path: '/simpleNetwork', component: require('./components/simplenetwork/simpleNetworkPage.vue') },
     { path: '/serialization', component: require('./components/serialization/serialization.vue') },
+    { path: '/deserialization', component: require('./components/deserialization/deserialization.vue') },
     { path: '/cppn', component: require('./components/cppn/cppn.vue') }
 ];
 
