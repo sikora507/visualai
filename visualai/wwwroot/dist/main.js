@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "254bb9ef798efe6188f1"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "31f68fd0d3bdf4a7788e"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -1368,7 +1368,7 @@ exports = module.exports = __webpack_require__(3)();
 
 
 // module
-exports.push([module.i, "\nbutton[data-v-5c286d38], textarea[data-v-5c286d38] {\n    margin: 0 0 20px 0;\n}\ntextarea[data-v-5c286d38] {\n    height: 80px;\n}\n", "", {"version":3,"sources":["/./ClientApp/components/deserialization/deserialization.vue?f884340a"],"names":[],"mappings":";AA4EA;IACA,mBAAA;CACA;AACA;IACA,aAAA;CACA","file":"deserialization.vue","sourcesContent":["<template>\r\n    <div>\r\n        <h2>Network Deserialization - max {{maxNeurons}} neurons</h2>\r\n        <vue-slider v-model=\"maxNeurons\" v-bind=\"sliderOptions\"></vue-slider>\r\n        <label>Neuron types</label>\r\n        <textarea class=\"form-control\" type=\"text\" readonly>{{ neuronTypes }}</textarea>\r\n        <label>Connection presences</label>\r\n        <textarea class=\"form-control\" type=\"text\" readonly>{{ connectionPresences }}</textarea>\r\n        <label>Connection weights</label>\r\n        <textarea class=\"form-control\" type=\"text\" readonly>{{ connectionWeights }}</textarea>\r\n        <button class=\"btn btn-primary\">Deserialize!</button>\r\n    </div>\r\n</template>\r\n<script>\r\n    import vueSlider from 'vue-slider-component';\r\n\r\n    var activationFunctions = ['Sigmoid', 'Gaussian', 'Sinc', 'Sine', 'Tanh'];\r\n\r\n    export default {\r\n        data: function () {\r\n            return {\r\n                maxNeurons: 20,\r\n                sliderOptions: {\r\n                    min: 5,\r\n                    max: 50,\r\n                    interval: 1,\r\n                    tooltip: false,\r\n                    processStyle: {\r\n                        \"backgroundColor\": \"gray\"\r\n                    }\r\n                },\r\n                bitsPrecision: 8\r\n            }\r\n        },\r\n        computed: {\r\n            neuronTypes: function () {\r\n                var chosenFunctions = [];\r\n                for (var i = 0; i < this.maxNeurons; ++i) {\r\n                    var randomFunctionIndex = Math.floor(Math.random() * activationFunctions.length);\r\n                    var chosenFunction = activationFunctions[randomFunctionIndex];\r\n                    chosenFunctions.push(chosenFunction);\r\n                }\r\n                return chosenFunctions.join(', ');\r\n            },\r\n            connectionPresences: function () {\r\n                var connectionPresences = [];\r\n                for (var i = 0; i < this.maxNeurons * this.maxNeurons; ++i) {\r\n                    var hasConnection = Math.round(Math.random());\r\n                    hasConnection ? connectionPresences.push(true) : connectionPresences.push(false);\r\n                }\r\n                return connectionPresences.join(', ');\r\n            },\r\n            connectionWeights: function () {\r\n                var binaryWeights = [];\r\n                for (var i = 0; i < this.maxNeurons * this.maxNeurons; ++i) {\r\n                    var bitsBuffer = [];\r\n                    for (var b = 0; b < this.bitsPrecision; b++) {\r\n                        var bit = Math.round(Math.random());\r\n                        bitsBuffer.push(bit);\r\n                    }\r\n                    binaryWeights.push(bitsBuffer.join(''));\r\n                }\r\n                return binaryWeights.join(', ');\r\n            }\r\n        },\r\n        mounted: function () {\r\n            fetch('api/simpleNetwork/GetBitsPrecision')\r\n                .then(data => data.json())\r\n                .then(result => this.bitsPrecision = result);\r\n        },\r\n        components: {\r\n            vueSlider\r\n        }\r\n    }\r\n</script>\r\n<style scoped>\r\n    button, textarea {\r\n        margin: 0 0 20px 0;\r\n    }\r\n    textarea {\r\n        height: 80px;\r\n    }\r\n</style>"],"sourceRoot":"webpack://"}]);
+exports.push([module.i, "\ntextarea[data-v-5c286d38] {\n    margin: 0 0 20px 0;\n    height: 80px;\n}\nbutton[data-v-5c286d38] {\n    margin: 0 20px 20px 0;\n}\n", "", {"version":3,"sources":["/./ClientApp/components/deserialization/deserialization.vue?3bea6244"],"names":[],"mappings":";AAkGA;IACA,mBAAA;IACA,aAAA;CACA;AACA;IACA,sBAAA;CACA","file":"deserialization.vue","sourcesContent":["<template>\r\n    <div>\r\n        <h2>Network Deserialization - max {{maxNeurons}} neurons</h2>\r\n        <vue-slider v-model=\"maxNeurons\" v-bind=\"sliderOptions\"></vue-slider>\r\n        <label>Neuron types</label>\r\n        <textarea class=\"form-control\" type=\"text\" readonly>{{ neuronTypes }}</textarea>\r\n        <label>Connection presences</label>\r\n        <textarea class=\"form-control\" type=\"text\" readonly>{{ connectionPresences }}</textarea>\r\n        <label>Connection weights</label>\r\n        <textarea class=\"form-control\" type=\"text\" readonly>{{ connectionWeights }}</textarea>\r\n        <button class=\"btn btn-primary pull-left\" @click=\"deserialize\">Deserialize</button>\r\n        <button v-if=\"wasDeserialized\" class=\"btn btn-primary pull-left\" @click=\"displayGraph\">Display Graph</button>\r\n    </div>\r\n</template>\r\n<script>\r\n    import vueSlider from 'vue-slider-component';\r\n\r\n    var activationFunctions = ['Sigmoid', 'Gaussian', 'Sinc', 'Sine', 'Tanh'];\r\n\r\n    export default {\r\n        data: function () {\r\n            return {\r\n                maxNeurons: 20,\r\n                sliderOptions: {\r\n                    min: 5,\r\n                    max: 50,\r\n                    interval: 1,\r\n                    tooltip: false,\r\n                    processStyle: {\r\n                        \"backgroundColor\": \"gray\"\r\n                    }\r\n                },\r\n                bitsPrecision: 8,\r\n                wasDeserialized: false\r\n            }\r\n        },\r\n        computed: {\r\n            neuronTypes: function () {\r\n                var chosenFunctions = [];\r\n                for (var i = 0; i < this.maxNeurons; ++i) {\r\n                    var randomFunctionIndex = Math.floor(Math.random() * activationFunctions.length);\r\n                    var chosenFunction = activationFunctions[randomFunctionIndex];\r\n                    chosenFunctions.push(chosenFunction);\r\n                }\r\n                return chosenFunctions.join(', ');\r\n            },\r\n            connectionPresences: function () {\r\n                var connectionPresences = [];\r\n                for (var i = 0; i < this.maxNeurons * this.maxNeurons; ++i) {\r\n                    var hasConnection = Math.round(Math.random());\r\n                    hasConnection ? connectionPresences.push(true) : connectionPresences.push(false);\r\n                }\r\n                return connectionPresences.join(', ');\r\n            },\r\n            connectionWeights: function () {\r\n                var binaryWeights = [];\r\n                for (var i = 0; i < this.maxNeurons * this.maxNeurons; ++i) {\r\n                    var bitsBuffer = [];\r\n                    for (var b = 0; b < this.bitsPrecision; b++) {\r\n                        var bit = Math.round(Math.random());\r\n                        bitsBuffer.push(bit);\r\n                    }\r\n                    binaryWeights.push(bitsBuffer.join(''));\r\n                }\r\n                return binaryWeights.join(', ');\r\n            }\r\n        },\r\n        mounted: function () {\r\n            fetch('api/simpleNetwork/GetBitsPrecision')\r\n                .then(data => data.json())\r\n                .then(result => this.bitsPrecision = result);\r\n        },\r\n        components: {\r\n            vueSlider\r\n        },\r\n        methods: {\r\n            deserialize: function () {\r\n                var self = this;\r\n                var data = {\r\n                    ActiFunctions: this.neuronTypes.split(', '),\r\n                    WeightsBinary: this.connectionWeights.split(', ').join('').split('').map(val => Number(val)),\r\n                    ConnectionPresence: this.connectionPresences.split(', ').map(val => val == 'true')\r\n                };\r\n                fetch('api/deserialization/Deserialize', {\r\n                    method: 'post', body: JSON.stringify(data), headers: {\r\n                        'Accept': 'application/json',\r\n                        'Content-Type': 'application/json'\r\n                    }}).then(function(){\r\n                        self.wasDeserialized = true;\r\n                    });\r\n            },\r\n            displayGraph: function () {\r\n                alert('todo');\r\n            }\r\n        }\r\n    }\r\n</script>\r\n<style scoped>\r\n    textarea {\r\n        margin: 0 0 20px 0;\r\n        height: 80px;\r\n    }\r\n    button {\r\n        margin: 0 20px 20px 0;\r\n    }\r\n</style>"],"sourceRoot":"webpack://"}]);
 
 // exports
 
@@ -62897,7 +62897,7 @@ var Component = __webpack_require__(2)(
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\Users\\Tomek\\Desktop\\visualai\\visualai\\ClientApp\\components\\activationfunctions\\activationfunctions.vue"
+Component.options.__file = "C:\\dev\\visualai\\visualai\\ClientApp\\components\\activationfunctions\\activationfunctions.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] activationfunctions.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -62935,7 +62935,7 @@ var Component = __webpack_require__(2)(
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\Users\\Tomek\\Desktop\\visualai\\visualai\\ClientApp\\components\\activationfunctions\\chart.vue"
+Component.options.__file = "C:\\dev\\visualai\\visualai\\ClientApp\\components\\activationfunctions\\chart.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] chart.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -62973,7 +62973,7 @@ var Component = __webpack_require__(2)(
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\Users\\Tomek\\Desktop\\visualai\\visualai\\ClientApp\\components\\activationfunctions\\previewcomponent.vue"
+Component.options.__file = "C:\\dev\\visualai\\visualai\\ClientApp\\components\\activationfunctions\\previewcomponent.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] previewcomponent.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -63007,7 +63007,7 @@ var Component = __webpack_require__(2)(
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\Users\\Tomek\\Desktop\\visualai\\visualai\\ClientApp\\components\\app\\app.vue"
+Component.options.__file = "C:\\dev\\visualai\\visualai\\ClientApp\\components\\app\\app.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] app.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -63045,7 +63045,7 @@ var Component = __webpack_require__(2)(
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\Users\\Tomek\\Desktop\\visualai\\visualai\\ClientApp\\components\\cppn\\cppn.vue"
+Component.options.__file = "C:\\dev\\visualai\\visualai\\ClientApp\\components\\cppn\\cppn.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] cppn.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -63083,7 +63083,7 @@ var Component = __webpack_require__(2)(
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\Users\\Tomek\\Desktop\\visualai\\visualai\\ClientApp\\components\\deserialization\\deserialization.vue"
+Component.options.__file = "C:\\dev\\visualai\\visualai\\ClientApp\\components\\deserialization\\deserialization.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] deserialization.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -63117,7 +63117,7 @@ var Component = __webpack_require__(2)(
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\Users\\Tomek\\Desktop\\visualai\\visualai\\ClientApp\\components\\home\\home.vue"
+Component.options.__file = "C:\\dev\\visualai\\visualai\\ClientApp\\components\\home\\home.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] home.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -63155,7 +63155,7 @@ var Component = __webpack_require__(2)(
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\Users\\Tomek\\Desktop\\visualai\\visualai\\ClientApp\\components\\navmenu\\navmenu.vue"
+Component.options.__file = "C:\\dev\\visualai\\visualai\\ClientApp\\components\\navmenu\\navmenu.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] navmenu.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -63193,7 +63193,7 @@ var Component = __webpack_require__(2)(
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\Users\\Tomek\\Desktop\\visualai\\visualai\\ClientApp\\components\\serialization\\actiFunctions.vue"
+Component.options.__file = "C:\\dev\\visualai\\visualai\\ClientApp\\components\\serialization\\actiFunctions.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] actiFunctions.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -63231,7 +63231,7 @@ var Component = __webpack_require__(2)(
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\Users\\Tomek\\Desktop\\visualai\\visualai\\ClientApp\\components\\serialization\\connectionsPresence.vue"
+Component.options.__file = "C:\\dev\\visualai\\visualai\\ClientApp\\components\\serialization\\connectionsPresence.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] connectionsPresence.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -63269,7 +63269,7 @@ var Component = __webpack_require__(2)(
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\Users\\Tomek\\Desktop\\visualai\\visualai\\ClientApp\\components\\serialization\\rawChromosome.vue"
+Component.options.__file = "C:\\dev\\visualai\\visualai\\ClientApp\\components\\serialization\\rawChromosome.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] rawChromosome.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -63307,7 +63307,7 @@ var Component = __webpack_require__(2)(
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\Users\\Tomek\\Desktop\\visualai\\visualai\\ClientApp\\components\\serialization\\serialization.vue"
+Component.options.__file = "C:\\dev\\visualai\\visualai\\ClientApp\\components\\serialization\\serialization.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] serialization.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -63345,7 +63345,7 @@ var Component = __webpack_require__(2)(
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\Users\\Tomek\\Desktop\\visualai\\visualai\\ClientApp\\components\\serialization\\weightsBinary.vue"
+Component.options.__file = "C:\\dev\\visualai\\visualai\\ClientApp\\components\\serialization\\weightsBinary.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] weightsBinary.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -63383,7 +63383,7 @@ var Component = __webpack_require__(2)(
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\Users\\Tomek\\Desktop\\visualai\\visualai\\ClientApp\\components\\serialization\\weightsDecimal.vue"
+Component.options.__file = "C:\\dev\\visualai\\visualai\\ClientApp\\components\\serialization\\weightsDecimal.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] weightsDecimal.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -63421,7 +63421,7 @@ var Component = __webpack_require__(2)(
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\Users\\Tomek\\Desktop\\visualai\\visualai\\ClientApp\\components\\simpleNetwork\\simpleNetwork.vue"
+Component.options.__file = "C:\\dev\\visualai\\visualai\\ClientApp\\components\\simpleNetwork\\simpleNetwork.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] simpleNetwork.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -63459,7 +63459,7 @@ var Component = __webpack_require__(2)(
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\Users\\Tomek\\Desktop\\visualai\\visualai\\ClientApp\\components\\simplenetwork\\simpleNetwork.vue"
+Component.options.__file = "C:\\dev\\visualai\\visualai\\ClientApp\\components\\simplenetwork\\simpleNetwork.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] simpleNetwork.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -63497,7 +63497,7 @@ var Component = __webpack_require__(2)(
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\Users\\Tomek\\Desktop\\visualai\\visualai\\ClientApp\\components\\simplenetwork\\simpleNetworkPage.vue"
+Component.options.__file = "C:\\dev\\visualai\\visualai\\ClientApp\\components\\simplenetwork\\simpleNetworkPage.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] simpleNetworkPage.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -63777,6 +63777,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -63795,7 +63796,8 @@ var activationFunctions = ['Sigmoid', 'Gaussian', 'Sinc', 'Sine', 'Tanh'];
                     "backgroundColor": "gray"
                 }
             },
-            bitsPrecision: 8
+            bitsPrecision: 8,
+            wasDeserialized: false
         }
     },
     computed: {
@@ -63836,6 +63838,26 @@ var activationFunctions = ['Sigmoid', 'Gaussian', 'Sinc', 'Sine', 'Tanh'];
     },
     components: {
         vueSlider: __WEBPACK_IMPORTED_MODULE_0_vue_slider_component___default.a
+    },
+    methods: {
+        deserialize: function () {
+            var self = this;
+            var data = {
+                ActiFunctions: this.neuronTypes.split(', '),
+                WeightsBinary: this.connectionWeights.split(', ').join('').split('').map(val => Number(val)),
+                ConnectionPresence: this.connectionPresences.split(', ').map(val => val == 'true')
+            };
+            fetch('api/deserialization/Deserialize', {
+                method: 'post', body: JSON.stringify(data), headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }}).then(function(){
+                    self.wasDeserialized = true;
+                });
+        },
+        displayGraph: function () {
+            alert('todo');
+        }
     }
 });
 
@@ -64662,8 +64684,16 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "readonly": ""
     }
   }, [_vm._v(_vm._s(_vm.connectionWeights))]), _vm._v(" "), _c('button', {
-    staticClass: "btn btn-primary"
-  }, [_vm._v("Deserialize!")])], 1)
+    staticClass: "btn btn-primary pull-left",
+    on: {
+      "click": _vm.deserialize
+    }
+  }, [_vm._v("Deserialize")]), _vm._v(" "), (_vm.wasDeserialized) ? _c('button', {
+    staticClass: "btn btn-primary pull-left",
+    on: {
+      "click": _vm.displayGraph
+    }
+  }, [_vm._v("Display Graph")]) : _vm._e()], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (true) {

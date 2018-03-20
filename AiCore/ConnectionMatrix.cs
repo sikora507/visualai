@@ -12,9 +12,9 @@ namespace AiCore
         public static readonly int WeightBitsPrecision = 8;
 
         // 3 "chromosomes"
-        public string[] ActiFunctions { get; set; }
-        public int[] WeightsBinary { get; set; }
-        public bool[] ConnectionPresence { get; set; }
+        public string[] ActiFunctions { get; set; } = new string[0];
+        public int[] WeightsBinary { get; set; } = new int[0];
+        public bool[] ConnectionPresence { get; set; } = new bool[0];
 
         // just for debug / preview
         // does not take part in crossover / mutation

@@ -5,10 +5,10 @@ namespace visualai.Controllers
 {
     public class SimpleNetworkController : Controller
     {
-        public static Network _network = new Network();
+        public static ExampleNetwork _network = new ExampleNetwork();
         public VisNetwork GetSimpleNetwork()
         {
-            _network = new Network();
+            _network = new ExampleNetwork();
             var result =_network.ToVisJsNetwork();
             return result;
         }

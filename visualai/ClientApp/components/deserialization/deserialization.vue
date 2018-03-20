@@ -8,7 +8,8 @@
         <textarea class="form-control" type="text" readonly>{{ connectionPresences }}</textarea>
         <label>Connection weights</label>
         <textarea class="form-control" type="text" readonly>{{ connectionWeights }}</textarea>
-        <button class="btn btn-primary">Deserialize!</button>
+        <button class="btn btn-primary pull-left" @click="deserialize">Deserialize</button>
+        <button v-if="wasDeserialized" class="btn btn-primary pull-left" @click="displayGraph">Display Graph</button>
     </div>
 </template>
 <script>
@@ -29,7 +30,8 @@
                         "backgroundColor": "gray"
                     }
                 },
-                bitsPrecision: 8
+                bitsPrecision: 8,
+                wasDeserialized: false
             }
         },
         computed: {
@@ -70,14 +72,35 @@
         },
         components: {
             vueSlider
+        },
+        methods: {
+            deserialize: function () {
+                var self = this;
+                var data = {
+                    ActiFunctions: this.neuronTypes.split(', '),
+                    WeightsBinary: this.connectionWeights.split(', ').join('').split('').map(val => Number(val)),
+                    ConnectionPresence: this.connectionPresences.split(', ').map(val => val == 'true')
+                };
+                fetch('api/deserialization/Deserialize', {
+                    method: 'post', body: JSON.stringify(data), headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    }}).then(function(){
+                        self.wasDeserialized = true;
+                    });
+            },
+            displayGraph: function () {
+                alert('todo');
+            }
         }
     }
 </script>
 <style scoped>
-    button, textarea {
-        margin: 0 0 20px 0;
-    }
     textarea {
+        margin: 0 0 20px 0;
         height: 80px;
+    }
+    button {
+        margin: 0 20px 20px 0;
     }
 </style>

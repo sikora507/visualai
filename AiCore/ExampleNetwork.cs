@@ -7,43 +7,41 @@ using System.Text;
 
 namespace AiCore
 {
-    public class Network
+    public class ExampleNetwork
     {
         private List<Neuron> _neurons { get; } = new List<Neuron>();
         private List<Connection> _connections { get; } = new List<Connection>();
-        private int _currentNeuronId = 0;
-
-        public Network()
+        private int _currentNeuronId = 1;
+        public ExampleNetwork()
         {
+            var in1 = new Neuron();
+            var in2 = new Neuron();
+            var hid1 = new Neuron();
+            var hid2 = new Neuron();
+            var hid3 = new Neuron();
+            var out1 = new Neuron();
 
-        }
+            AddConnection(new Connection(in1, hid1, 2));
+            AddConnection(new Connection(in1, hid2, 1));
+            AddConnection(new Connection(in1, hid3, 2));
 
-        public Network(ConnectionMatrix connectionMatrix)
-        {
-            var neuronsCount = connectionMatrix.ActiFunctions.Length;
-            foreach (var actiFunction in connectionMatrix.ActiFunctions)
-            {
-                var function = ActiFunctionsCollection.ActivationFunctionsArray.Single(x => x.Name == actiFunction);
-                AddNeuron(new Neuron
-                {
-                    ActivationFunction = function
-                });
-            }
-            var buffer = new int[ConnectionMatrix.WeightBitsPrecision];
-            for (int row = 0; row < neuronsCount; row++)
-            {
-                for (int column = 0; column < neuronsCount; column++)
-                {
-                    if (connectionMatrix.ConnectionPresence[row * neuronsCount + column])
-                    {
-                        // get weight from binary
-                        Array.Copy(connectionMatrix.WeightsBinary, row * neuronsCount * ConnectionMatrix.WeightBitsPrecision + column * ConnectionMatrix.WeightBitsPrecision, buffer, 0, ConnectionMatrix.WeightBitsPrecision);
-                        var weight = BinaryCalculator.ToDecimal(buffer, ConnectionMatrix.MinWeight, ConnectionMatrix.MaxWeight);
-                        // setup connection
-                        AddConnection(new Connection(_neurons[row], _neurons[column], weight));
-                    }
-                }
-            }
+            AddConnection(new Connection(in2, hid1, 1.5));
+            AddConnection(new Connection(in2, hid2, 1));
+            AddConnection(new Connection(in2, hid3, 1.5));
+
+            AddConnection(new Connection(hid1, out1, 3));
+            AddConnection(new Connection(hid2, out1, 2));
+            AddConnection(new Connection(hid3, out1, 0.5));
+
+            AddNeuron(in1);
+            AddNeuron(in2);
+            AddNeuron(hid1);
+            AddNeuron(hid2);
+            AddNeuron(hid3);
+            AddNeuron(out1);
+
+            in1.InputSum = 5;
+            in2.InputSum = 5;
         }
 
         public ConnectionMatrix ToConnectionMatrix()
@@ -70,7 +68,7 @@ namespace AiCore
                 conMatrix.ConnectionPresence[row * neuronsCount + col] = true;
                 // update connection weight
                 var weightBinary = BinaryCalculator.ToBinary(connection.Weight, ConnectionMatrix.WeightBitsPrecision, ConnectionMatrix.MinWeight, ConnectionMatrix.MaxWeight);
-                for (var i = 0; i < weightBinary.Length; ++i)
+                for(var i = 0; i < weightBinary.Length; ++i)
                 {
                     conMatrix.WeightsBinary[row * neuronsCount * ConnectionMatrix.WeightBitsPrecision + col * ConnectionMatrix.WeightBitsPrecision + i] = weightBinary[i];
                 }
