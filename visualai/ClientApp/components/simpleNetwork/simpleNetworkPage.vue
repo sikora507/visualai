@@ -10,7 +10,7 @@
 </template>
 <script>
     import { DataSet, Network } from 'vis';
-    import SimpleNetwork from './simpleNetwork.vue';
+    import SimpleNetwork from './simplenetwork.vue';
 
     var nodes = null;
     export default {

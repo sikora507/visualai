@@ -16,7 +16,7 @@
         </div>
     </template>
     <script>
-        import SimpleNetwork from '../simpleNetwork/simpleNetwork.vue';
+        import SimpleNetwork from '../simpleNetwork/simplenetwork.vue';
         import ActivationFunctions from './actiFunctions.vue';
         import WeightsBinary from './weightsBinary.vue';
         import WeightsDecimal from './weightsDecimal.vue';
